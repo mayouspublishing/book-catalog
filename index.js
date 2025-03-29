@@ -20,4 +20,5 @@ async function handleRequest(request) {
   
   // Proxy the request to your target URL
   return fetch(targetUrl, request);
+  
 }

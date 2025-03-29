@@ -7,7 +7,7 @@ async function handleRequest(request) {
   let incomingUrl = new URL(request.url);
   
   // Define your target Apps Script URL (replace YOUR_APPS_SCRIPT_URL with your actual URL)
-  const targetBase = "https://script.google.com/macros/s/AKfycbwPOh5eUMK-d8Sy8YTzRv707KxlafjFhIZSn0dLE41ahlj-RpyPgncBCrJoP2obcIPlYA/exec";
+  const targetBase = "https://script.google.com/macros/s/AKfycbyIcapwCMZq0w9myM1PlNEuT39VAGPaBy277B2ZSkhp6mRgV08Bsa85t3k7NDV8id0a/exec";
   
   // We assume requests to /book-catalog should be proxied to your Apps Script
   // Remove the "/book-catalog" path portion (if needed)

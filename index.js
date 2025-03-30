@@ -11,7 +11,7 @@ async function handleRequest(request) {
   
   // We assume requests to /book-catalog should be proxied to your Apps Script
   // Remove the "/book-catalog" path portion (if needed)
-  let modifiedPath = incomingUrl.pathname.replace(/^\/book-catalog/, "");
+  let modifiedPath = incomingUrl.pathname.replace(/^\/shop/, "");
   
   // Rebuild the target URL with the query string
   let targetUrl = targetBase + modifiedPath + incomingUrl.search;

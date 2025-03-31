@@ -5,4 +5,4 @@ account_id = "d6a1f43dd0b2d4efd5e301baa532fe30"  # Replace with your account ID
 workers_dev = false
 route = "https://www.mayous.org/shop*"
 zone_id= "e08ad294b9b7b4afdde5a0bf16a0e862"
-compatibility_date = "2025-03-29"
+compatibility_date = "2025-03-30"

@@ -1,10 +1,18 @@
 const TARGET_BASE = "https://script.google.com/macros/s/AKfycbyIcapwCMZq0w9myM1PlNEuT39VAGPaBy277B2ZSkhp6mRgV08Bsa85t3k7NDV8id0a/exec";
 
-class AssetRewriter {
+class LinkRewriter {
   element(element) {
-    const attrs = ["href", "src", "action"];
+    const attrMap = {
+      a: "href",
+      form: "action",
+      img: "src",
+      link: "href",
+    };
 
-    for (const attr of attrs) {
+    const tag = element.tagName.toLowerCase();
+    const attr = attrMap[tag];
+
+    if (attr) {
       const value = element.getAttribute(attr);
       if (value && value.startsWith("/")) {
         element.setAttribute(attr, TARGET_BASE + value);
@@ -32,11 +40,10 @@ async function handleRequest(request) {
 
   if (contentType.includes("text/html")) {
     return new HTMLRewriter()
-      .on("a", new AssetRewriter())
-      .on("link", new AssetRewriter())
-      .on("script", new AssetRewriter())
-      .on("form", new AssetRewriter())
-      .on("img", new AssetRewriter())
+      .on("a", new LinkRewriter())
+      .on("form", new LinkRewriter())
+      .on("img", new LinkRewriter())
+      .on("link", new LinkRewriter())
       .transform(response);
   }
 

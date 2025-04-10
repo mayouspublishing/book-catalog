@@ -1,4 +1,4 @@
-const TARGET_BASE = "https://script.google.com/macros/s/AKfycbyIcapwCMZq0w9myM1PlNEuT39VAGPaBy277B2ZSkhp6mRgV08Bsa85t3k7NDV8id0a/exec";
+const TARGET_BASE = "https://script.google.com/macros/s/AKfycbz7gw96zj3KoCYmnW1SWLiRdLl-Nw11EfY1szHozREhGNnq-XHK4g_pMJBBFsu94qKl/exec";
 
 export default {
   async fetch(request) {

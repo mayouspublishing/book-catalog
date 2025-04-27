@@ -1,4 +1,5 @@
-const TARGET_BASE = "https://script.google.com/macros/s/AKfycbwVM4K2yf0KN7WT_dZ5jjIKqep7bR3AKfyXp8dMZebAZC6JhwHXYp8r_tqfAONdycwy/exec";
+const TARGET_BASE = "https://script.google.com/macros/s/AKfycbw_eefCgzpmzF8t3Q8u5hpGSxn_9wayxKWvNKNRPuLl_Rgd1S1AWhJtNPwz3eShwdDP/exec";
+const GTM_ID = "GTM-KDSN97QK"; // <-- your GTM ID here
 
 export default {
   async fetch(request) {
@@ -9,6 +10,25 @@ export default {
         <meta charset="UTF-8">
         <title>Mayous Book Catalog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+         <!-- Inject GTM Script -->
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            'gtm.start': new Date().getTime(),
+            event: 'gtm.js'
+          });
+          (function(w,d,s,l,i){
+            w[l]=w[l]||[];
+            w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+            var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+            j.async=true;
+            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+            f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','${GTM_ID}');
+        </script>
+        
         <style>
           html, body {
             margin: 0;

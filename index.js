@@ -1,4 +1,4 @@
-const TARGET_BASE = "https://script.google.com/macros/s/AKfycbwjvPqFE1-zZVABHFuDU-uRBymu_MJZSV7FcIJHBOEOBcX3WID09c7Ke1Rb2HhXD1zz/exec";
+const TARGET_BASE = "https://script.google.com/macros/s/AKfycbyv8cd5EQykhOJSDYScR3EkZzgVYnaa7l4pVTHeyCHqBCKaxMHUzC1YRDkH-2WTXrsR/exec";
 const GTM_ID = "GTM-KDSN97QK"; // <-- your GTM ID here
 
 export default {

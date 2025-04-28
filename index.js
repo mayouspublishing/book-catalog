@@ -32,20 +32,25 @@ export default {
 <script>
   window.addEventListener('message', function(event) {
     try {
-      // 🔥 For testing, allow all origins
-      if (event.data && event.data.event === 'preview_click') {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: 'preview_click',
-          book_title: event.data.book_title
-        });
-        console.log('✅ preview_click event received from iframe and pushed to dataLayer');
+      // 🎯 Only accept messages from Google Apps Script iframe
+      if (event.origin.includes('googleusercontent.com') || event.origin.includes('script.googleusercontent.com')) {
+        if (event.data && event.data.event === 'preview_click') {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'preview_click',
+            book_title: event.data.book_title
+          });
+          console.log('✅ preview_click event received from iframe and pushed to dataLayer:', event.data);
+        }
+      } else {
+        console.warn('⚠️ Ignored postMessage from unknown origin:', event.origin);
       }
     } catch (error) {
       console.error('❌ Error handling postMessage:', error);
     }
   });
 </script>
+
 
         <style>
           html, body {

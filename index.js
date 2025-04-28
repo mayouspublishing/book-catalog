@@ -1,4 +1,4 @@
-const TARGET_BASE = "https://script.google.com/macros/s/AKfycbwn8xVFxZvk2Yuw094Y0OkgAR4-vADz9k3HgQAkCrTwSJOwk0B9hui_XKi4Hc5mXep3/exec";
+const TARGET_BASE = "https://script.google.com/macros/s/AKfycbw9FrFJqa5HAD6ld33-KzXNW9b-BDU2ho2n17KaZjVhC8p2PjjyB4Us_7VxU9w0dOl1/exec";
 const GTM_ID = "GTM-KDSN97QK"; // <-- your GTM ID here
 
 export default {
@@ -28,7 +28,19 @@ export default {
             f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','${GTM_ID}');
         </script>
-        
+        <!-- 📈 Listen for postMessage preview_click events from iframe -->
+<script>
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.event === 'preview_click') {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'preview_click',
+        book_title: event.data.book_title
+      });
+      console.log('✅ preview_click event received and pushed to parent dataLayer');
+    }
+  });
+</script>
         <style>
           html, body {
             margin: 0;

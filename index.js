@@ -31,16 +31,21 @@ export default {
         <!-- 📈 Listen for postMessage preview_click events from iframe -->
 <script>
   window.addEventListener('message', function(event) {
-    if (event.data && event.data.event === 'preview_click') {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'preview_click',
-        book_title: event.data.book_title
-      });
-      console.log('✅ preview_click event received and pushed to parent dataLayer');
+    if (event.origin.includes('googleusercontent.com')) {
+      if (event.data && event.data.event === 'preview_click') {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'preview_click',
+          book_title: event.data.book_title
+        });
+        console.log('✅ preview_click event received from iframe and pushed to dataLayer');
+      }
+    } else {
+      console.warn('⚠️ Ignored postMessage from unexpected origin:', event.origin);
     }
   });
 </script>
+
         <style>
           html, body {
             margin: 0;

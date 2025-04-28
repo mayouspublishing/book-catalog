@@ -31,7 +31,8 @@ export default {
         <!-- 📈 Listen for postMessage preview_click events from iframe -->
 <script>
   window.addEventListener('message', function(event) {
-    if (event.origin.includes('googleusercontent.com')) {
+    try {
+      // 🔥 For testing, allow all origins
       if (event.data && event.data.event === 'preview_click') {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -40,8 +41,8 @@ export default {
         });
         console.log('✅ preview_click event received from iframe and pushed to dataLayer');
       }
-    } else {
-      console.warn('⚠️ Ignored postMessage from unexpected origin:', event.origin);
+    } catch (error) {
+      console.error('❌ Error handling postMessage:', error);
     }
   });
 </script>

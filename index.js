@@ -11,31 +11,16 @@ export default {
         <title>Mayous Book Catalog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
        
-         <!-- Inject GTM Script -->
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            'gtm.start': new Date().getTime(),
-            event: 'gtm.js'
-          });
-          (function(w,d,s,l,i){
-            w[l]=w[l]||[];
-            w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-            var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-            j.async=true;
-            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-            f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','${GTM_ID}');
-        </script>
-        <!-- 📈 Listen for postMessage preview_click events from iframe -->
+        <!-- 📈 Setup dataLayer and Listen for preview_click before loading GTM -->
 <script>
+  window.dataLayer = window.dataLayer || [];
+
+  // Listen for postMessage events (for iframe communication)
   window.addEventListener('message', function(event) {
     try {
-      // 🎯 Only accept messages from Google Apps Script iframe
+      // Accept messages ONLY from Google Apps Script iframe
       if (event.origin.includes('googleusercontent.com') || event.origin.includes('script.googleusercontent.com')) {
         if (event.data && event.data.event === 'preview_click') {
-          window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
             event: 'preview_click',
             book_title: event.data.book_title
@@ -43,13 +28,17 @@ export default {
           console.log('✅ preview_click event received from iframe and pushed to dataLayer:', event.data);
         }
       } else {
-        console.warn('⚠️ Ignored postMessage from unknown origin:', event.origin);
+        console.warn('⚠️ Ignored postMessage from unexpected origin:', event.origin);
       }
     } catch (error) {
       console.error('❌ Error handling postMessage:', error);
     }
   });
 </script>
+
+<!-- ✅ Load GTM AFTER setting up dataLayer -->
+<script async src="https://www.googletagmanager.com/gtm.js?id=${GTM_ID}"></script>
+
 
 
         <style>

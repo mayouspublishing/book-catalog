@@ -1,19 +1,12 @@
-const CATALOG_ORIGIN = "https://catalog-shop.pages.dev";
-
 export default {
   async fetch(request) {
     const url = new URL(request.url);
 
-    // Strip "/shop" prefix to forward to the real origin
-    const pathname = url.pathname.replace(/^\/shop/, "") || "/";
-    const targetUrl = `${CATALOG_ORIGIN}${pathname}${url.search}`;
+    // Strip the "/shop" prefix and keep the rest of the path + query
+    const redirectPath = url.pathname.replace(/^\/shop/, "") || "/";
+    const redirectUrl = `https://shop.mayous.org${redirectPath}${url.search}`;
 
-    return fetch(targetUrl, {
-      method: request.method,
-      headers: request.headers,
-      body: request.body,
-      redirect: "follow"
-    });
+    return Response.redirect(redirectUrl, 301); // 301 = Permanent redirect
   }
 };
 
